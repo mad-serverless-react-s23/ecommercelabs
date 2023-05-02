@@ -44,6 +44,31 @@ app.use(function(req, res, next) {
   next()
 });
 
+const getGroupsForUser = async (event) => {
+  let userSub = event.requestContext
+      .identity
+      .cognitoAuthenticationProvider
+      .split(':CognitoSignIn:')[1]
+  
+  let userParams = {
+    UserPoolId: userpoolId,
+    Filter: `sub = "${userSub}"`
+  }
+
+  let userData = await cognito.listUsers(userParams).promise();
+
+  const user = userData.Users[0];
+
+  var groupParams = {
+    UserPoolId: userpoolId,
+    Username: user.Username
+  }
+
+  const groupData = await cognito.adminListGroupsForUser(groupParams).promise();
+
+  return groupData;
+}
+
 
 /**********************
  * Example get method *
