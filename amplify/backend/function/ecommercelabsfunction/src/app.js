@@ -91,10 +91,25 @@ const canPerformAction = async (event, group) => {
  * Example get method *
  **********************/
 
-app.get('/products', function(req, res) {
-  // Add your code here
+app.get('/products', async function(req, res) {
+  try {
+    const data = await getItems();
+    res.json({ data: data });
+  } catch (err) {
+    res.json({ error: err });
+  }
   res.json({success: 'get call succeed!', url: req.url});
 });
+
+const getItems = async () => {
+  var params = { TableName: ddb_table_name }
+  try {
+    const data = await docClient.scan(params).promise();
+    return data;
+  } catch (err) {
+    return err;
+  }
+}
 
 app.get('/products/*', function(req, res) {
   // Add your code here
