@@ -69,6 +69,23 @@ const getGroupsForUser = async (event) => {
   return groupData;
 }
 
+const canPerformAction = async (event, group) => {
+  return new Promise(async (resolve,reject) => {
+    if (!event.requestContext.identity.cognitoAuthenticationProvider) {
+      return reject();
+    }
+
+    const groupData = await getGroupsForUser(event);
+    const groupsForUser = groupData.Groups.map(group => group.GroupName);
+
+    if (groupsForUser.includes(group)) {
+      resolve();
+    } else {
+      reject('user not in group, cannot perform action..');
+    }
+  })
+}
+
 
 /**********************
  * Example get method *
