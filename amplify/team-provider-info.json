@@ -18,7 +18,8 @@
       "function": {
         "ecommercelabs32e7baf7PostConfirmation": {
           "GROUP": "Admin"
-        }
+        },
+        "ecommercelabsfunction": {}
       }
     }
   }
