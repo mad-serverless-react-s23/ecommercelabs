@@ -19,6 +19,18 @@ Amplify Params - DO NOT EDIT */
 const express = require('express')
 const bodyParser = require('body-parser')
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
+const AWS = require('aws-sdk')
+const { v4: uuid } = require('uuid')
+
+const cognito = new AWS.CognitoIdentityServiceProvider({
+  apiVersion: '2016-04-18'
+})
+
+var userpoolId = process.env.AUTH_ECOMMERCELABS32E7BAF7_USERPOOLID
+
+const region = process.env.REGION
+const ddb_table_name = process.env.STORAGE_PRODUCTTABLE_NAME
+const docClient = new AWS.DynamoDB.DocumentClient({region})
 
 // declare a new express app
 const app = express()
