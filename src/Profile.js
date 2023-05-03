@@ -20,9 +20,5 @@ const Profile = () => {
     )
 }
 
-const containerStyle = {
-    width: 400,
-    margin: '20px auto'
-}
 
-export default Profile
+export default Authenticator(Profile)
