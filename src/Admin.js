@@ -41,10 +41,10 @@ const Admin = () => {
             />
             <Input 
                 name='price'
-                onChnage={updateForm}
+                onChange={updateForm}
                 value={itemInfo.price}
-                style={inputStyle}
                 placeholder='What is the price?'
+                style={inputStyle}
             />
             <Button
                 style={buttonStyle}
