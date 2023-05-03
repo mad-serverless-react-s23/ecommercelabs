@@ -21,7 +21,7 @@ const Nav = ({ current }) => {
     return (
         <div>
             <Menu>
-                <Menu.Item key='home'>
+                <Menu.Item selectedKeys={[current]} key='home'>
                     <Link to={`/`}>
                         <HomeOutlined />Home
                     </Link>
