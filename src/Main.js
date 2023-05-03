@@ -12,9 +12,9 @@ const Main = () => {
     let didCancel = false;
 
     useEffect(() => {
-        getProducts()
-        checkUser(updateUser)
-        return () => didCancel = true
+        getProducts();
+        checkUser(updateUser);
+        return () => didCancel = true;
     }, []);
 
     const getProducts = async() => {
