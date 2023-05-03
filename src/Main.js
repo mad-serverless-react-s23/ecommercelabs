@@ -26,7 +26,7 @@ const Main = () => {
         })
     }
 
-    const deleteItem = async(id) => {
+    const deleteItem = async (id) => {
         try {
             const products = state.products.filter(p => p.id !== id)
             setState({ ...state, products })
