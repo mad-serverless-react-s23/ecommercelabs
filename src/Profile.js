@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import { Authenticator } from '@aws-amplify/ui-react';
 import { Button } from 'antd';
