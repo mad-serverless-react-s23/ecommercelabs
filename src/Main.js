@@ -48,8 +48,8 @@ const Main = () => {
                 renderItem={item => (
                     <List.Item
                         actions={user.isAuthorized
-                        ? [<p onClick={() => deleteItem(item.id)}
-                        key={item.id}>delete</p>] : null}
+                        ? [<button onClick={() => deleteItem(item.id)}
+                        key={item.id}>delete</button>] : null}
                     >
                         <List.Item.Meta 
                             title={item.name}
