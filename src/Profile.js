@@ -5,8 +5,7 @@ import '@aws-amplify/ui-react/styles.css';
 
 const Profile = () => {
     return (
-        <div style={containerStyle}>
-            <Authenticator>
+        <Authenticator>
             {({ signOut, user }) => (
                 <>
                 <h1>Content!</h1>
@@ -15,8 +14,7 @@ const Profile = () => {
                 <Button onClick={signOut}>Click to sign out?</Button>
                 </>
             )}
-            </Authenticator>
-        </div>
+        </Authenticator>
     )
 }
 
