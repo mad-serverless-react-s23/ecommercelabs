@@ -14,10 +14,10 @@ const Main = () => {
     useEffect(() => {
         getProducts()
         checkUser(updateUser)
-        return () => didCancel = true
+        return () => didCancel = true;
     }, []);
 
-    const getProducts = async() => {
+    const getProducts = async () => {
         const data = await API.get('ecommercelabsapi', '/products');
         console.log('data: ', data);
         if (didCancel) return
