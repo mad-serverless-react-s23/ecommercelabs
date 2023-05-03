@@ -20,7 +20,7 @@ const Nav = ({ current }) => {
 
     return (
         <div>
-            <Menu>
+            <Menu selectedKeys={[current]} mode="horizontal">
                 <Menu.Item key='home'>
                     <Link to={`/`}>
                         <HomeOutlined />Home
