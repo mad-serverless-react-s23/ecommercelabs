@@ -160,9 +160,21 @@ app.put('/products/*', function(req, res) {
 * Example delete method *
 ****************************/
 
-app.delete('/products', function(req, res) {
-  // Add your code here
-  res.json({success: 'delete call succeed!', url: req.url});
+app.delete('/products', async function(req, res) {
+  const { event } = req.apiGateway;
+
+  try {
+    await canPerformAction(event, 'Admin')
+    var params = {
+      TableName: ddb_table_name,
+      Key: { id: req.body.id }
+    }
+
+    await docClient.delete(params).promise();
+    res.json({ success: 'Got that removed for ya, boss' });
+  } catch (err) {
+    res.json({ error: err })
+  }
 });
 
 app.delete('/products/*', function(req, res) {
