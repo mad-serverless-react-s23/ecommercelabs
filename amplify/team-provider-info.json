@@ -21,11 +21,11 @@
         "ecommercelabs32e7baf7PostConfirmation": {
           "GROUP": "Admin",
           "deploymentBucketName": "amplify-ecommercelabs-dev-175235-deployment",
-          "s3Key": "amplify-builds/ecommercelabs32e7baf7PostConfirmation-77496762486963494842-build.zip"
+          "s3Key": "amplify-builds/ecommercelabs32e7baf7PostConfirmation-43736357426c42634b73-build.zip"
         },
         "ecommercelabsfunction": {
           "deploymentBucketName": "amplify-ecommercelabs-dev-175235-deployment",
-          "s3Key": "amplify-builds/ecommercelabsfunction-64716d2b4746714e594b-build.zip"
+          "s3Key": "amplify-builds/ecommercelabsfunction-3331796b62466e797276-build.zip"
         }
       },
       "storage": {
