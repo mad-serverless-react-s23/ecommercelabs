@@ -32,6 +32,41 @@ const region = process.env.REGION
 const ddb_table_name = process.env.STORAGE_PRODUCTTABLE_NAME
 const docClient = new AWS.DynamoDB.DocumentClient({region})
 
+const getGroupsForUser = async (event) => {
+  let userSub = event.requestContext
+      .identity
+      .cognitoAuthenticationProvider
+      .split(':CognitoSignIn:')[1]
+  
+  let userParams = {
+    UserPoolId: userpoolId,
+    Filter: `sub = "${userSub}"`
+  }
+  let userData = await cognito.listUsers(userParams).promise();
+  const user = userData.Users[0];
+  var groupParams = {
+    UserPoolId: userpoolId,
+    Username: user.Username
+  }
+  const groupData = await cognito.adminListGroupsForUser(groupParams).promise();
+  return groupData;
+}
+
+const canPerformAction = async (event, group) => {
+  return new Promise(async (resolve,reject) => {
+    if (!event.requestContext.identity.cognitoAuthenticationProvider) {
+      return reject();
+    }
+    const groupData = await getGroupsForUser(event);
+    const groupsForUser = groupData.Groups.map(group => group.GroupName);
+    if (groupsForUser.includes(group)) {
+      resolve();
+    } else {
+      reject('user not in group, cannot perform action..');
+    }
+  })
+}
+
 // declare a new express app
 const app = express()
 app.use(bodyParser.json())
@@ -43,49 +78,6 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "*")
   next()
 });
-
-const getGroupsForUser = async (event) => {
-  let userSub = event.requestContext
-      .identity
-      .cognitoAuthenticationProvider
-      .split(':CognitoSignIn:')[1]
-  
-  let userParams = {
-    UserPoolId: userpoolId,
-    Filter: `sub = "${userSub}"`
-  }
-
-  let userData = await cognito.listUsers(userParams).promise();
-
-  const user = userData.Users[0];
-
-  var groupParams = {
-    UserPoolId: userpoolId,
-    Username: user.Username
-  }
-
-  const groupData = await cognito.adminListGroupsForUser(groupParams).promise();
-
-  return groupData;
-}
-
-const canPerformAction = async (event, group) => {
-  return new Promise(async (resolve,reject) => {
-    if (!event.requestContext.identity.cognitoAuthenticationProvider) {
-      return reject();
-    }
-
-    const groupData = await getGroupsForUser(event);
-    const groupsForUser = groupData.Groups.map(group => group.GroupName);
-
-    if (groupsForUser.includes(group)) {
-      resolve();
-    } else {
-      reject('user not in group, cannot perform action..');
-    }
-  })
-}
-
 
 /**********************
  * Example get method *
