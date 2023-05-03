@@ -89,6 +89,38 @@
           "resourceName": "ecommercelabs32e7baf7PostConfirmation"
         }
       ]
+    },
+    "AMPLIFY_function_ecommercelabs32e7baf7PostConfirmation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ecommercelabs32e7baf7PostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_ecommercelabs32e7baf7PostConfirmation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ecommercelabs32e7baf7PostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_ecommercelabsfunction_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ecommercelabsfunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_ecommercelabsfunction_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ecommercelabsfunction"
+        }
+      ]
     }
   },
   "storage": {
