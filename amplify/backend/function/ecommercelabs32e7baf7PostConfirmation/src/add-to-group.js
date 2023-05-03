@@ -39,34 +39,3 @@ exports.handler = async (event, context, callback) => {
     callback(null, event);
   }
 };
-
-
-
-/**
- * @type {import('@types/aws-lambda').PostConfirmationTriggerHandler}
- */
-exports.handler = async (event) => {
-  const groupParams = {
-    GroupName: process.env.GROUP,
-    UserPoolId: event.userPoolId,
-  };
-  const addUserParams = {
-    GroupName: process.env.GROUP,
-    UserPoolId: event.userPoolId,
-    Username: event.userName,
-  };
-  /**
-   * Check if the group exists; if it doesn't, create it.
-   */
-  try {
-    await cognitoProvider.getGroup(groupParams).promise();
-  } catch (e) {
-    await cognitoProvider.createGroup(groupParams).promise();
-  }
-  /**
-   * Then, add the user to the group.
-   */
-  await cognitoProvider.adminAddUserToGroup(addUserParams).promise();
-
-  return event;
-};
